@@ -1,3 +1,4 @@
+//Imports
 import { 
         ADD_TODO, 
         FETCH_TODOS, 
@@ -8,15 +9,16 @@ import {
         SET_FILTER_TO_ALL }  from './mutation-types'
 import axios from 'axios'
 
-//Initial State
+//State initial
 export const state = () => ({
     todos: [],
     filter: 'All'
 })
 
 
+//Fonctions donnant accès aux éléments du state depuis les composants 
+//en retournant la partie du store a exploiter
 export const getters = {
-    //Donne accès aux éléments du state depuis les composants
     
     getTodos: (state) => {
         return state.todos
@@ -33,11 +35,13 @@ export const getters = {
     getFilter: (state) => {
         return state.filter
     }
+
 }
 
+
+//Mutations (fonctions) qui permettent de modifier le state
 export const mutations = {
-    //Mutations qui permettent de modifier le state
-    
+
     FETCH_TODOS(state, todos) {
         state.todos = todos
     },
@@ -70,19 +74,19 @@ export const mutations = {
 }
 
 
+//Permet de créer des actions
+//prend en parametre la fonction "commit"  qui permet de générer une modictaion du state dans les mutations 
+//et prend en parametre le nom de la mutation ainsi que la valeur a renvoyer au mutateur pour modifier le state
 export const actions = {
-    //Permet de créer des actions
-    //prend en parametre la fonction "commit"  qui permet de générer une modictaion du state dans les mutations 
-    //et prend en parametre le nom de la mutation ainsi que la valeur a renvoyer au mutateur pour modifier le state
 
-    //Récupération des todos et envoi du tableau récupérer vers le mutateur
+    //Récupération des todos et envoi du tableau récupéré vers le mutateur
     fetchTodos: async ({commit}) => {
         const result = await axios.get('http://localhost:5000/api/v1/todos')
         const todos = result.data
         commit(FETCH_TODOS, todos)
     },
 
-    //Ajout du todo et envoi du todo ajouté récupérer vers le mutateur
+    //Ajout du todo en DB et envoi du todo ajouté  et récupéré depuis le serveur, vers le mutateur
     addTodo: async({commit}, content) => {
         const result = await axios.post('http://localhost:5000/api/v1/todos', {
             content
@@ -141,4 +145,5 @@ export const actions = {
     setFilterToAll: ({commit}) => {
         commit(SET_FILTER_TO_ALL)
     }
+
 }
