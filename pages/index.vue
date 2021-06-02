@@ -3,10 +3,9 @@
 </template>
 
 <script>
-import Home from '../components/Home'
-export default {
-
-}
+  import Home from '../components/Home'
+  export default {
+  }
 </script>
 
 <style >

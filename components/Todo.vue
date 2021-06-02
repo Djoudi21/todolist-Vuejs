@@ -56,7 +56,6 @@
 
 <script>
     import { mapActions, mapGetters } from 'vuex'
-
     export default {
         
         //Name of the component
@@ -84,7 +83,7 @@
                 setTodoContent: 'todos/setTodoContent'
             }),
 
-            //Get editing mode to show the input that allows to update the content
+            //Get editing mode "on" to show the input that allows to update the content
             handleDbclick() {
                 this.editing = true
             },
